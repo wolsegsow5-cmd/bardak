@@ -2,228 +2,60 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talha Glass | Marketplace</title>
+    <title>Talha Glass | Ürün Yönetimi</title>
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --border-color: #d0d7de;
-            --text-main: #1f2328;
-            --text-secondary: #636c76;
-            --blue-btn: #0969da;
-            --gray-btn: #f6f8fa;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        /* GitHub Style Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
-            margin-bottom: 40px;
-        }
-
-        /* Görseldeki Kart Yapısı */
-        .card {
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: 0.2s;
-        }
-
-        .card:hover {
-            background-color: #fcfcfc;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--blue-btn);
-            margin: 0;
-            cursor: pointer;
-        }
-
-        .card-subtitle {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        .card-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin: 12px 0;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 16px;
-        }
-
-        .btn-configure {
-            background-color: var(--gray-btn);
-            border: 1px solid var(--border-color);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background-color: #ffffff; padding: 20px; color: #1f2328; }
+        .header { display: flex; align-items: center; border-bottom: 1px solid #d0d7de; padding-bottom: 10px; margin-bottom: 20px; }
+        .repo-name { font-size: 20px; color: #0969da; font-weight: 600; margin-left: 10px; }
+        
+        /* Ekran görüntüsündeki kart yapısı */
+        .section-title { font-size: 16px; font-weight: 600; margin: 20px 0 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+        .card { border: 1px solid #d0d7de; border-radius: 6px; padding: 16px; display: flex; flex-direction: column; }
+        .card-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .card-title { font-size: 14px; font-weight: 600; color: #0969da; }
+        .card-desc { font-size: 12px; color: #636c76; margin: 10px 0; line-height: 1.5; }
+        
+        .btn-configure { background-color: #f6f8fa; border: 1px solid #d0d7de; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; align-self: flex-start; }
         .btn-configure:hover { background-color: #f3f4f6; }
-
-        .type-tag {
-            font-size: 12px;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-        }
-
-        .dot {
-            height: 12px;
-            width: 12px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-left: 6px;
-        }
-
-        /* Admin Section */
-        .admin-bar {
-            background: #24292f;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .admin-input {
-            padding: 5px;
-            border-radius: 4px;
-            border: none;
-            margin-right: 10px;
-        }
+        
+        .status { font-size: 12px; color: #636c76; display: flex; align-items: center; float: right; }
+        .dot { height: 12px; width: 12px; border-radius: 50%; display: inline-block; margin-left: 5px; background-color: #0969da; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="admin-bar">
-        <span>Talha Glass Admin Panel</span>
-        <div>
-            <input type="text" id="pName" class="admin-input" placeholder="Ürün Adı">
-            <input type="text" id="pPrice" class="admin-input" placeholder="Fiyat">
-            <button onclick="addNewItem()" class="btn-configure" style="background: #2da44e; color: white; border: none;">+ Yeni Ürün Ekle</button>
-        </div>
+    <div class="header">
+        <svg height="32" viewBox="0 0 16 16" width="32"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+        <span class="repo-name">wolsegsow5-cmd / bardak</span>
     </div>
 
-    <h2>Koleksiyon Önerileri (Suggested for you)</h2>
-    <div class="grid" id="mainGrid">
-        <div class="card">
-            <div>
-                <div class="card-header">
-                    <h3 class="card-title">Kristal Kesim Su Bardağı</h3>
-                    <img src="https://via.placeholder.com/32" style="border-radius: 50%;">
-                </div>
-                <p class="card-subtitle">By Talha Glass Studio</p>
-                <p class="card-desc">Özel elmas kesim teknikleriyle üretilmiş, Paşabahçe serisi ağırlığında lüks su bardağı seti.</p>
-            </div>
-            <div class="card-footer">
-                <button class="btn-configure">Satın Al</button>
-                <span class="type-tag">Fiyat: 1.450₺ <span class="dot" style="background-color: #f1e05a;"></span></span>
-            </div>
-        </div>
-
-        <div class="card">
-            <div>
-                <div class="card-header">
-                    <h3 class="card-title">Antik Bakır Çanak</h3>
-                    <img src="https://via.placeholder.com/32" style="border-radius: 50%;">
-                </div>
-                <p class="card-subtitle">By Heritage Collection</p>
-                <p class="card-desc">Geleneksel motiflerin modern cam işçiliğiyle buluştuğu dekoratif sunum çanağı.</p>
-            </div>
-            <div class="card-footer">
-                <button class="btn-configure">Satın Al</button>
-                <span class="type-tag">Fiyat: 850₺ <span class="dot" style="background-color: #e34c26;"></span></span>
-            </div>
-        </div>
-    </div>
-
-    <h2>Kategoriler (Deployment)</h2>
+    <div class="section-title">Suggested for this inventory</div>
     <div class="grid">
         <div class="card">
-            <h3 class="card-title">Yemek Takımları</h3>
-            <p class="card-desc">Porselen ve camın eşsiz uyumuyla hazırlanan 12 kişilik setler.</p>
-            <button class="btn-configure">Tümünü Gör</button>
+            <div class="card-header">
+                <div class="card-title">Kesme Kristal Bardak Seti</div>
+                <img src="https://via.placeholder.com/30" style="border-radius: 50%;">
+            </div>
+            <p class="card-desc">Paşabahçe tarzı ağır tabanlı, 6'lı su bardağı koleksiyonu. Özel gün sunumları için ideal.</p>
+            <div>
+                <button class="btn-configure">İncele</button>
+                <span class="status">Stokta <span class="dot"></span></span>
+            </div>
         </div>
+
         <div class="card">
-            <h3 class="card-title">Dekoratif Objeler</h3>
-            <p class="card-desc">Evinize hava katacak vazolar, mumluklar ve biblolar.</p>
-            <button class="btn-configure">Tümünü Gör</button>
+            <div class="card-header">
+                <div class="card-title">Yaldızlı Kahve Yanı</div>
+                <img src="https://via.placeholder.com/30" style="border-radius: 50%;">
+            </div>
+            <p class="card-desc">Kenarları 24 ayar altın yaldız kaplama, el yapımı minyatür bardak serisi.</p>
+            <div>
+                <button class="btn-configure">İncele</button>
+                <span class="status">Stokta <span class="dot" style="background-color: #f1e05a;"></span></span>
+            </div>
         </div>
     </div>
-</div>
-
-<script>
-    function addNewItem() {
-        const name = document.getElementById('pName').value;
-        const price = document.getElementById('pPrice').value;
-        if(!name || !price) return alert("Bilgileri girin!");
-
-        const grid = document.getElementById('mainGrid');
-        const newCard = `
-            <div class="card">
-                <div>
-                    <div class="card-header">
-                        <h3 class="card-title">${name}</h3>
-                        <img src="https://via.placeholder.com/32" style="border-radius: 50%;">
-                    </div>
-                    <p class="card-subtitle">By Talha Glass Admin</p>
-                    <p class="card-desc">Yeni eklenen el işçiliği ürün. Stok durumu: Mevcut.</p>
-                </div>
-                <div class="card-footer">
-                    <button class="btn-configure">Satın Al</button>
-                    <span class="type-tag">Fiyat: ${price}₺ <span class="dot" style="background-color: #0969da;"></span></span>
-                </div>
-            </div>
-        `;
-        grid.innerHTML += newCard;
-    }
-</script>
 
 </body>
 </html>
