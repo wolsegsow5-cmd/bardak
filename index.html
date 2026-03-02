@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talha Glass Store | Kristal ve Cam Sanatı</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root { --main-color: #003366; --text-color: #333; --light-bg: #f9f9f9; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; color: var(--text-color); }
+        
+        /* Paşabahçe Style Header */
+        header { border-bottom: 1px solid #ddd; padding: 15px 0; position: sticky; top: 0; background: white; z-index: 100; }
+        .nav-container { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; letter-spacing: 2px; color: var(--main-color); text-decoration: none; }
+        nav a { text-decoration: none; color: #555; margin-left: 25px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: var(--main-color); }
+
+        /* Hero Banner */
+        .hero { height: 400px; background: url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        .hero-content { background: rgba(0,0,0,0.3); padding: 40px; border-radius: 5px; }
+
+        /* Ürünler Grid */
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
+        .section-title { text-align: center; font-size: 28px; margin-bottom: 40px; border-bottom: 2px solid var(--main-color); display: inline-block; padding-bottom: 10px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { border: 1px solid #eee; padding: 10px; transition: 0.3s; position: relative; overflow: hidden; }
+        .product-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .product-card img { width: 100%; height: 300px; object-fit: cover; }
+        .product-card h3 { font-size: 16px; margin: 15px 0 5px; }
+        .product-card .price { font-weight: bold; color: var(--main-color); font-size: 18px; }
+
+        /* İletişim */
+        .contact-box { background: var(--light-bg); padding: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; }
+        .btn-submit { background: var(--main-color); color: white; border: none; padding: 15px 30px; cursor: pointer; }
+
+        /* Admin Login Butonu */
+        .admin-link { position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 10px; border-radius: 50%; font-size: 12px; text-decoration: none; opacity: 0.5; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav-container">
+        <a href="#" class="logo">TALHA GLASS</a>
+        <nav>
+            <a href="#home">Anasayfa</a>
+            <a href="#shop">Ürünler</a>
+            <a href="#contact">İletişim</a>
+            <a href="javascript:void(0)" onclick="openAdmin()">Admin Girişi</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Sofralara Değer Katan Cam Tasarımları</h1>
+        <p>Paşabahçe Kalitesinde El İşçiliği Bardak ve Tabaklar</p>
+    </div>
+</section>
+
+<div class="container" id="shop">
+    <div style="text-align:center;"><h2 class="section-title">Yeni Koleksiyon</h2></div>
+    <div class="product-grid" id="productDisplay">
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1544145945-f904253db0ad?w=500" alt="Bardak">
+            <h3>Kristal Kesim Su Bardağı (6'lı)</h3>
+            <p class="price">₺1.450</p>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1610450949065-1f2849ec3002?w=500" alt="Tabak">
+            <h3>Yaldızlı Yemek Tabağı Seti</h3>
+            <p class="price">₺3.200</p>
+        </div>
+        <div class="product-card">
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500" alt="Çanak">
+            <h3>Cam Sunum Çanağı</h3>
+            <p class="price">₺850</p>
+        </div>
+    </div>
+</div>
+
+<section class="container" id="contact">
+    <div class="contact-box">
+        <div>
+            <h2>Bize Ulaşın</h2>
+            <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
+            <p><i class="fas fa-phone"></i> +90 212 000 00 00</p>
+            <p><i class="fas fa-envelope"></i> info@talhaglass.com</p>
+        </div>
+        <form>
+            <input type="text" placeholder="Adınız">
+            <input type="email" placeholder="E-posta Adresiniz">
+            <textarea rows="5" placeholder="Mesajınız"></textarea>
+            <button type="button" class="btn-submit">Gönder</button>
+        </form>
+    </div>
+</section>
+
+<div id="adminPanel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1001;">
+    <div style="background:white; width:80%; max-width:600px; margin:50px auto; padding:30px; border-radius:10px;">
+        <h2 id="panelTitle">Admin Girişi</h2>
+        <div id="loginForm">
+            <input type="text" id="adminUser" placeholder="Kullanıcı Adı">
+            <input type="password" id="adminPass" placeholder="Şifre">
+            <button onclick="login()" class="btn-submit">Giriş Yap</button>
+        </div>
+        <div id="managementForm" style="display:none;">
+            <h3>Yeni Ürün Ekle</h3>
+            <input type="text" id="pName" placeholder="Ürün Adı">
+            <input type="text" id="pPrice" placeholder="Fiyat (₺)">
+            <input type="text" id="pImg" placeholder="Görsel URL (Unsplash vb.)">
+            <button onclick="addProduct()" class="btn-submit">Ürünü Yayınla</button>
+        </div>
+        <br>
+        <button onclick="closeAdmin()" style="background:#ccc; border:none; padding:10px;">Kapat</button>
+    </div>
+</div>
+
+<script>
+    function openAdmin() { document.getElementById('adminPanel').style.display = 'block'; }
+    function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
+    
+    function login() {
+        const user = document.getElementById('adminUser').value;
+        const pass = document.getElementById('adminPass').value;
+        if(user === "talha" && pass === "1234") {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('managementForm').style.display = 'block';
+            document.getElementById('panelTitle').innerText = "Mağaza Yönetimi";
+        } else {
+            alert("Hatalı giriş!");
+        }
+    }
+
+    function addProduct() {
+        const name = document.getElementById('pName').value;
+        const price = document.getElementById('pPrice').value;
+        const img = document.getElementById('pImg').value;
+        
+        const grid = document.getElementById('productDisplay');
+        const newCard = `
+            <div class="product-card">
+                <img src="${img}" alt="${name}">
+                <h3>${name}</h3>
+                <p class="price">₺${price}</p>
+            </div>
+        `;
+        grid.innerHTML += newCard;
+        alert("Ürün başarıyla eklendi!");
+        closeAdmin();
+    }
+</script>
+
+</body>
+</html>
