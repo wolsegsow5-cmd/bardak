@@ -3,153 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talha Glass Store | Kristal ve Cam Sanatı</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Talha Glass | Marketplace</title>
     <style>
-        :root { --main-color: #003366; --text-color: #333; --light-bg: #f9f9f9; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; color: var(--text-color); }
-        
-        /* Paşabahçe Style Header */
-        header { border-bottom: 1px solid #ddd; padding: 15px 0; position: sticky; top: 0; background: white; z-index: 100; }
-        .nav-container { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-        .logo { font-size: 24px; font-weight: bold; letter-spacing: 2px; color: var(--main-color); text-decoration: none; }
-        nav a { text-decoration: none; color: #555; margin-left: 25px; font-size: 14px; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { color: var(--main-color); }
+        :root {
+            --bg-color: #ffffff;
+            --border-color: #d0d7de;
+            --text-main: #1f2328;
+            --text-secondary: #636c76;
+            --blue-btn: #0969da;
+            --gray-btn: #f6f8fa;
+        }
 
-        /* Hero Banner */
-        .hero { height: 400px; background: url('https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1600&q=80') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
-        .hero-content { background: rgba(0,0,0,0.3); padding: 40px; border-radius: 5px; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+        }
 
-        /* Ürünler Grid */
-        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
-        .section-title { text-align: center; font-size: 28px; margin-bottom: 40px; border-bottom: 2px solid var(--main-color); display: inline-block; padding-bottom: 10px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-        .product-card { border: 1px solid #eee; padding: 10px; transition: 0.3s; position: relative; overflow: hidden; }
-        .product-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 300px; object-fit: cover; }
-        .product-card h3 { font-size: 16px; margin: 15px 0 5px; }
-        .product-card .price { font-weight: bold; color: var(--main-color); font-size: 18px; }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        /* İletişim */
-        .contact-box { background: var(--light-bg); padding: 50px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; }
-        .btn-submit { background: var(--main-color); color: white; border: none; padding: 15px 30px; cursor: pointer; }
+        h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
 
-        /* Admin Login Butonu */
-        .admin-link { position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 10px; border-radius: 50%; font-size: 12px; text-decoration: none; opacity: 0.5; }
+        /* GitHub Style Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* Görseldeki Kart Yapısı */
+        .card {
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            background-color: #fcfcfc;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--blue-btn);
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 12px 0;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+        }
+
+        .btn-configure {
+            background-color: var(--gray-btn);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-configure:hover { background-color: #f3f4f6; }
+
+        .type-tag {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 6px;
+        }
+
+        /* Admin Section */
+        .admin-bar {
+            background: #24292f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-input {
+            padding: 5px;
+            border-radius: 4px;
+            border: none;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="nav-container">
-        <a href="#" class="logo">TALHA GLASS</a>
-        <nav>
-            <a href="#home">Anasayfa</a>
-            <a href="#shop">Ürünler</a>
-            <a href="#contact">İletişim</a>
-            <a href="javascript:void(0)" onclick="openAdmin()">Admin Girişi</a>
-        </nav>
-    </div>
-</header>
-
-<section class="hero" id="home">
-    <div class="hero-content">
-        <h1>Sofralara Değer Katan Cam Tasarımları</h1>
-        <p>Paşabahçe Kalitesinde El İşçiliği Bardak ve Tabaklar</p>
-    </div>
-</section>
-
-<div class="container" id="shop">
-    <div style="text-align:center;"><h2 class="section-title">Yeni Koleksiyon</h2></div>
-    <div class="product-grid" id="productDisplay">
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1544145945-f904253db0ad?w=500" alt="Bardak">
-            <h3>Kristal Kesim Su Bardağı (6'lı)</h3>
-            <p class="price">₺1.450</p>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1610450949065-1f2849ec3002?w=500" alt="Tabak">
-            <h3>Yaldızlı Yemek Tabağı Seti</h3>
-            <p class="price">₺3.200</p>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=500" alt="Çanak">
-            <h3>Cam Sunum Çanağı</h3>
-            <p class="price">₺850</p>
-        </div>
-    </div>
-</div>
-
-<section class="container" id="contact">
-    <div class="contact-box">
+<div class="container">
+    <div class="admin-bar">
+        <span>Talha Glass Admin Panel</span>
         <div>
-            <h2>Bize Ulaşın</h2>
-            <p><i class="fas fa-map-marker-alt"></i> İstanbul, Türkiye</p>
-            <p><i class="fas fa-phone"></i> +90 212 000 00 00</p>
-            <p><i class="fas fa-envelope"></i> info@talhaglass.com</p>
+            <input type="text" id="pName" class="admin-input" placeholder="Ürün Adı">
+            <input type="text" id="pPrice" class="admin-input" placeholder="Fiyat">
+            <button onclick="addNewItem()" class="btn-configure" style="background: #2da44e; color: white; border: none;">+ Yeni Ürün Ekle</button>
         </div>
-        <form>
-            <input type="text" placeholder="Adınız">
-            <input type="email" placeholder="E-posta Adresiniz">
-            <textarea rows="5" placeholder="Mesajınız"></textarea>
-            <button type="button" class="btn-submit">Gönder</button>
-        </form>
     </div>
-</section>
 
-<div id="adminPanel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1001;">
-    <div style="background:white; width:80%; max-width:600px; margin:50px auto; padding:30px; border-radius:10px;">
-        <h2 id="panelTitle">Admin Girişi</h2>
-        <div id="loginForm">
-            <input type="text" id="adminUser" placeholder="Kullanıcı Adı">
-            <input type="password" id="adminPass" placeholder="Şifre">
-            <button onclick="login()" class="btn-submit">Giriş Yap</button>
+    <h2>Koleksiyon Önerileri (Suggested for you)</h2>
+    <div class="grid" id="mainGrid">
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <h3 class="card-title">Kristal Kesim Su Bardağı</h3>
+                    <img src="https://via.placeholder.com/32" style="border-radius: 50%;">
+                </div>
+                <p class="card-subtitle">By Talha Glass Studio</p>
+                <p class="card-desc">Özel elmas kesim teknikleriyle üretilmiş, Paşabahçe serisi ağırlığında lüks su bardağı seti.</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn-configure">Satın Al</button>
+                <span class="type-tag">Fiyat: 1.450₺ <span class="dot" style="background-color: #f1e05a;"></span></span>
+            </div>
         </div>
-        <div id="managementForm" style="display:none;">
-            <h3>Yeni Ürün Ekle</h3>
-            <input type="text" id="pName" placeholder="Ürün Adı">
-            <input type="text" id="pPrice" placeholder="Fiyat (₺)">
-            <input type="text" id="pImg" placeholder="Görsel URL (Unsplash vb.)">
-            <button onclick="addProduct()" class="btn-submit">Ürünü Yayınla</button>
+
+        <div class="card">
+            <div>
+                <div class="card-header">
+                    <h3 class="card-title">Antik Bakır Çanak</h3>
+                    <img src="https://via.placeholder.com/32" style="border-radius: 50%;">
+                </div>
+                <p class="card-subtitle">By Heritage Collection</p>
+                <p class="card-desc">Geleneksel motiflerin modern cam işçiliğiyle buluştuğu dekoratif sunum çanağı.</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn-configure">Satın Al</button>
+                <span class="type-tag">Fiyat: 850₺ <span class="dot" style="background-color: #e34c26;"></span></span>
+            </div>
         </div>
-        <br>
-        <button onclick="closeAdmin()" style="background:#ccc; border:none; padding:10px;">Kapat</button>
+    </div>
+
+    <h2>Kategoriler (Deployment)</h2>
+    <div class="grid">
+        <div class="card">
+            <h3 class="card-title">Yemek Takımları</h3>
+            <p class="card-desc">Porselen ve camın eşsiz uyumuyla hazırlanan 12 kişilik setler.</p>
+            <button class="btn-configure">Tümünü Gör</button>
+        </div>
+        <div class="card">
+            <h3 class="card-title">Dekoratif Objeler</h3>
+            <p class="card-desc">Evinize hava katacak vazolar, mumluklar ve biblolar.</p>
+            <button class="btn-configure">Tümünü Gör</button>
+        </div>
     </div>
 </div>
 
 <script>
-    function openAdmin() { document.getElementById('adminPanel').style.display = 'block'; }
-    function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
-    
-    function login() {
-        const user = document.getElementById('adminUser').value;
-        const pass = document.getElementById('adminPass').value;
-        if(user === "talha" && pass === "1234") {
-            document.getElementById('loginForm').style.display = 'none';
-            document.getElementById('managementForm').style.display = 'block';
-            document.getElementById('panelTitle').innerText = "Mağaza Yönetimi";
-        } else {
-            alert("Hatalı giriş!");
-        }
-    }
-
-    function addProduct() {
+    function addNewItem() {
         const name = document.getElementById('pName').value;
         const price = document.getElementById('pPrice').value;
-        const img = document.getElementById('pImg').value;
-        
-        const grid = document.getElementById('productDisplay');
+        if(!name || !price) return alert("Bilgileri girin!");
+
+        const grid = document.getElementById('mainGrid');
         const newCard = `
-            <div class="product-card">
-                <img src="${img}" alt="${name}">
-                <h3>${name}</h3>
-                <p class="price">₺${price}</p>
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <h3 class="card-title">${name}</h3>
+                        <img src="https://via.placeholder.com/32" style="border-radius: 50%;">
+                    </div>
+                    <p class="card-subtitle">By Talha Glass Admin</p>
+                    <p class="card-desc">Yeni eklenen el işçiliği ürün. Stok durumu: Mevcut.</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-configure">Satın Al</button>
+                    <span class="type-tag">Fiyat: ${price}₺ <span class="dot" style="background-color: #0969da;"></span></span>
+                </div>
             </div>
         `;
         grid.innerHTML += newCard;
-        alert("Ürün başarıyla eklendi!");
-        closeAdmin();
     }
 </script>
 
