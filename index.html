@@ -137,38 +137,38 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Haftalık Gösterim</h3>
-                <p>1,452,300</p>
+                <p>18,450</p>
             </div>
             <div class="stat-card">
                 <h3>Site Tıklanması</h3>
-                <p>145,820</p>
+                <p>1,820</p>
             </div>
             <div class="stat-card">
                 <h3>Coin İncelenmesi</h3>
-                <p>89,450</p>
+                <p>945</p>
             </div>
             <div class="stat-card">
                 <h3>Dönüşüm Oranı</h3>
-                <p>% 6.15</p>
+                <p>% 5.14</p>
             </div>
         </div>
 
         <div class="charts-grid">
             <div class="chart-container">
-                <h3 style="margin-top:0;">Günlük Trafik Akışı (Sahte Veri)</h3>
+                <h3 style="margin-top:0;">Günlük Trafik Akışı (Son 7 Gün)</h3>
                 <canvas id="trafficChart"></canvas>
             </div>
             
             <div class="chart-container">
                 <h3 style="margin-top:0;">Ülkelere Göre Tıklanmalar</h3>
                 <ul class="country-list">
-                    <li><span>🇺🇸 Amerika Birleşik Devletleri</span> <strong>45,210</strong></li>
-                    <li><span>🇩🇪 Almanya</span> <strong>28,400</strong></li>
-                    <li><span>🇬🇧 İngiltere</span> <strong>21,150</strong></li>
-                    <li><span>🇹🇷 Türkiye</span> <strong>18,900</strong></li>
-                    <li><span>🇷🇺 Rusya</span> <strong>12,450</strong></li>
-                    <li><span>🇧🇷 Brezilya</span> <strong>9,800</strong></li>
-                    <li><span>🇯🇵 Japonya</span> <strong>6,300</strong></li>
+                    <li><span>🇺🇸 Amerika Birleşik Devletleri</span> <strong>450</strong></li>
+                    <li><span>🇩🇪 Almanya</span> <strong>320</strong></li>
+                    <li><span>🇹🇷 Türkiye</span> <strong>310</strong></li>
+                    <li><span>🇬🇧 İngiltere</span> <strong>285</strong></li>
+                    <li><span>🇷🇺 Rusya</span> <strong>215</strong></li>
+                    <li><span>🇧🇷 Brezilya</span> <strong>140</strong></li>
+                    <li><span>🇯🇵 Japonya</span> <strong>100</strong></li>
                 </ul>
             </div>
         </div>
@@ -203,15 +203,24 @@
         }
 
         // Fake Grafik Verileri (Chart.js)
+        let chartInstance = null;
+
         function renderChart() {
             const ctx = document.getElementById('trafficChart').getContext('2d');
-            new Chart(ctx, {
+            
+            // Eğer grafik daha önce oluşturulduysa, üzerine yazmamak için önce yok et
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+
+            chartInstance = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'],
                     datasets: [{
                         label: 'Site Tıklanması',
-                        data: [15000, 22000, 18000, 25000, 21000, 32000, 12820],
+                        // Günlük 200-300 arası tıklanma verisi
+                        data: [210, 285, 240, 310, 260, 295, 220],
                         borderColor: '#00ffcc',
                         backgroundColor: 'rgba(0, 255, 204, 0.1)',
                         borderWidth: 2,
@@ -220,7 +229,8 @@
                     },
                     {
                         label: 'Coin İncelenmesi',
-                        data: [8000, 12000, 15000, 14000, 11000, 19000, 10450],
+                        // Tıklayanların yaklaşık yarısı inceliyor gibi bir veri
+                        data: [95, 140, 115, 180, 130, 165, 120],
                         borderColor: '#94a3b8',
                         borderWidth: 2,
                         fill: false,
