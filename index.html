@@ -3,122 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Talha Glass | Kristal ve Cam Sanatı</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>ICARUS - Reklam Yönetim Paneli</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #fff; color: #1a1a1a; }
-        .serif { font-family: 'Playfair Display', serif; }
-        .nav-link { letter-spacing: 0.1em; font-size: 0.75rem; transition: 0.3s; }
-        .nav-link:hover { color: #003366; }
-        .admin-panel { display: none; background: rgba(0,0,0,0.9); }
+        :root {
+            --primary: #00ffcc;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* GİRİŞ EKRANI */
+        #login-section {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            text-align: center;
+            width: 300px;
+        }
+        #login-section h2 { margin-top: 0; color: var(--primary); }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #00cca3; }
+        .error { color: #ff4d4d; font-size: 14px; display: none; margin-top: 10px; }
+
+        /* PANEL EKRANI */
+        #dashboard-section {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        header h1 { margin: 0; color: var(--primary); }
+        .logout-btn { width: auto; padding: 8px 16px; background: #ef4444; color: white; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid var(--primary);
+        }
+        .stat-card h3 { margin: 0; font-size: 16px; color: var(--text-muted); }
+        .stat-card p { margin: 10px 0 0; font-size: 28px; font-weight: bold; }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        .chart-container {
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .country-list { list-style: none; padding: 0; margin: 0; }
+        .country-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #334155;
+        }
+        .country-list li:last-child { border-bottom: none; }
+        
+        @media (max-width: 768px) {
+            .charts-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <header class="border-b border-gray-100 sticky top-0 z-50 bg-white/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex space-x-8 uppercase nav-link font-semibold">
-                <a href="#">Sofra</a>
-                <a href="#">Mutfak</a>
-                <a href="#">Dekorasyon</a>
+    <div id="login-section">
+        <h2>ICARUS Ads Yönetimi</h2>
+        <p style="color: var(--text-muted); font-size: 14px;">Lütfen admin bilgilerinizi girin.</p>
+        <input type="text" id="username" placeholder="Kullanıcı Adı" autocomplete="off">
+        <input type="password" id="password" placeholder="Şifre">
+        <button onclick="login()">Giriş Yap</button>
+        <div id="error-msg" class="error">Hatalı kullanıcı adı veya şifre!</div>
+    </div>
+
+    <div id="dashboard-section">
+        <header>
+            <h1>ICARUS - Haftalık Reklam Özeti</h1>
+            <button class="logout-btn" onclick="logout()">Çıkış Yap</button>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Haftalık Gösterim</h3>
+                <p>1,452,300</p>
+            </div>
+            <div class="stat-card">
+                <h3>Site Tıklanması</h3>
+                <p>145,820</p>
+            </div>
+            <div class="stat-card">
+                <h3>Coin İncelenmesi</h3>
+                <p>89,450</p>
+            </div>
+            <div class="stat-card">
+                <h3>Dönüşüm Oranı</h3>
+                <p>% 6.15</p>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <h3 style="margin-top:0;">Günlük Trafik Akışı (Sahte Veri)</h3>
+                <canvas id="trafficChart"></canvas>
             </div>
             
-            <div class="serif text-3xl font-bold tracking-tighter text-[#003366]">TALHA GLASS</div>
-            
-            <div class="flex items-center space-x-6">
-                <button onclick="toggleAdmin()" class="text-[10px] border border-gray-300 px-3 py-1 rounded hover:bg-gray-50 uppercase tracking-widest">Yönetim</button>
-                <a href="#" class="nav-link">GİRİŞ</a>
-                <a href="#" class="nav-link font-bold text-[#003366]">SEPET (0)</a>
-            </div>
-        </div>
-    </header>
-
-    <section class="relative h-[650px] bg-[#f8f8f8] flex items-center overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-12 items-center w-full">
-            <div class="z-10">
-                <h2 class="serif italic text-2xl text-[#003366] mb-4">Yeni Koleksiyon</h2>
-                <h1 class="serif text-6xl font-bold leading-tight mb-8">Zarafetin <br> Camdaki İmzası</h1>
-                <p class="text-gray-500 max-w-md mb-10 leading-relaxed">İstanbul'un kadim cam işçiliği, modern tasarım anlayışıyla sofralarınıza konuk oluyor.</p>
-                <a href="#" class="bg-[#003366] text-white px-10 py-4 text-sm tracking-[0.2em] hover:bg-black transition">KEŞFET</a>
-            </div>
-            <div class="relative">
-                <img src="https://images.unsplash.com/photo-1516052321480-99883605c338?auto=format&fit=crop&w=1200&q=80" class="w-full h-[550px] object-cover shadow-2xl">
-            </div>
-        </div>
-    </section>
-
-    <main class="max-w-7xl mx-auto px-6 py-24">
-        <div class="flex justify-between items-end mb-16">
-            <h3 class="serif text-4xl">Sizin İçin Seçtiklerimiz</h3>
-            <a href="#" class="text-xs border-b border-black pb-1 font-semibold uppercase tracking-widest">Tüm Ürünler</a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8" id="productGrid">
-            <div class="group cursor-pointer">
-                <div class="aspect-[4/5] bg-[#fdfdfd] overflow-hidden mb-6 relative">
-                    <img src="https://images.unsplash.com/photo-1544145945-f904253db0ad?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                    <div class="absolute bottom-0 left-0 right-0 bg-white/80 p-4 translate-y-full group-hover:translate-y-0 transition">
-                        <button class="w-full py-2 text-xs font-bold tracking-widest bg-[#003366] text-white">SEPETE EKLE</button>
-                    </div>
-                </div>
-                <h4 class="serif text-lg mb-1">Kristal Kesim Su Kadehi</h4>
-                <p class="text-gray-400 text-[10px] uppercase tracking-widest mb-2">Artisan Serisi</p>
-                <p class="font-bold text-[#003366]">₺1.450,00</p>
-            </div>
-
-            <div class="group cursor-pointer">
-                <div class="aspect-[4/5] bg-[#fdfdfd] overflow-hidden mb-6 relative">
-                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                </div>
-                <h4 class="serif text-lg mb-1">Amber Viski Seti</h4>
-                <p class="text-gray-400 text-[10px] uppercase tracking-widest mb-2">Özel Tasarım</p>
-                <p class="font-bold text-[#003366]">₺2.200,00</p>
-            </div>
-        </div>
-    </main>
-
-    <div id="adminPanel" class="admin-panel fixed inset-0 z-[100] flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-2xl p-10 relative">
-            <button onclick="toggleAdmin()" class="absolute top-4 right-4 text-2xl">&times;</button>
-            <h2 class="serif text-3xl mb-8">Mağaza Yönetimi</h2>
-            <div class="space-y-6">
-                <input type="text" id="pName" placeholder="Ürün Adı" class="w-full border-b border-gray-300 py-3 outline-none focus:border-[#003366]">
-                <input type="text" id="pPrice" placeholder="Fiyat (Örn: 1.500)" class="w-full border-b border-gray-300 py-3 outline-none focus:border-[#003366]">
-                <input type="text" id="pImg" placeholder="Görsel Linki" class="w-full border-b border-gray-300 py-3 outline-none focus:border-[#003366]">
-                <button onclick="addNewProduct()" class="w-full bg-[#003366] text-white py-4 font-bold tracking-widest uppercase mt-6">Sisteme Yükle</button>
+            <div class="chart-container">
+                <h3 style="margin-top:0;">Ülkelere Göre Tıklanmalar</h3>
+                <ul class="country-list">
+                    <li><span>🇺🇸 Amerika Birleşik Devletleri</span> <strong>45,210</strong></li>
+                    <li><span>🇩🇪 Almanya</span> <strong>28,400</strong></li>
+                    <li><span>🇬🇧 İngiltere</span> <strong>21,150</strong></li>
+                    <li><span>🇹🇷 Türkiye</span> <strong>18,900</strong></li>
+                    <li><span>🇷🇺 Rusya</span> <strong>12,450</strong></li>
+                    <li><span>🇧🇷 Brezilya</span> <strong>9,800</strong></li>
+                    <li><span>🇯🇵 Japonya</span> <strong>6,300</strong></li>
+                </ul>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleAdmin() {
-            const panel = document.getElementById('adminPanel');
-            panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
+        // Basit Giriş Sistemi
+        function login() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            if (user === 'admin' && pass === '1234') {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('dashboard-section').style.display = 'block';
+                document.body.style.alignItems = 'flex-start'; // Paneli yukarı hizala
+                document.body.style.paddingTop = '40px';
+                renderChart();
+            } else {
+                errorMsg.style.display = 'block';
+            }
         }
 
-        function addNewProduct() {
-            const name = document.getElementById('pName').value;
-            const price = document.getElementById('pPrice').value;
-            const img = document.getElementById('pImg').value;
-            
-            if(!name || !price) return;
-
-            const grid = document.getElementById('productGrid');
-            const newCard = `
-                <div class="group cursor-pointer">
-                    <div class="aspect-[4/5] bg-[#fdfdfd] overflow-hidden mb-6 relative">
-                        <img src="${img || 'https://via.placeholder.com/400x500'}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-                    </div>
-                    <h4 class="serif text-lg mb-1">${name}</h4>
-                    <p class="text-gray-400 text-[10px] uppercase tracking-widest mb-2">Yeni Koleksiyon</p>
-                    <p class="font-bold text-[#003366]">₺${price},00</p>
-                </div>
-            `;
-            grid.innerHTML += newCard;
-            toggleAdmin();
-            alert("Yeni ürün vitrine eklendi!");
+        function logout() {
+            document.getElementById('login-section').style.display = 'block';
+            document.getElementById('dashboard-section').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('error-msg').style.display = 'none';
+            document.body.style.alignItems = 'center';
+            document.body.style.paddingTop = '0';
         }
+
+        // Fake Grafik Verileri (Chart.js)
+        function renderChart() {
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'],
+                    datasets: [{
+                        label: 'Site Tıklanması',
+                        data: [15000, 22000, 18000, 25000, 21000, 32000, 12820],
+                        borderColor: '#00ffcc',
+                        backgroundColor: 'rgba(0, 255, 204, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'Coin İncelenmesi',
+                        data: [8000, 12000, 15000, 14000, 11000, 19000, 10450],
+                        borderColor: '#94a3b8',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#334155' }
+                        },
+                        x: {
+                            grid: { color: '#334155' }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#f8fafc' } }
+                    }
+                }
+            });
+        }
+        
+        // Enter tuşu ile giriş yapabilme
+        document.getElementById("password").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                login();
+            }
+        });
     </script>
 </body>
 </html>
