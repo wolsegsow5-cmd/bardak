@@ -111,9 +111,10 @@
         }
         .stat-card.financial { border-left-color: var(--warning); }
         .stat-card.planning { border-left-color: var(--info); }
-        .stat-card h3 { margin: 0; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        /* Taşmayı önlemek için sağdan padding eklendi */
+        .stat-card h3 { margin: 0; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; padding-right: 40px; }
         .stat-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; }
-        .stat-card .trend { font-size: 12px; color: var(--success); position: absolute; top: 20px; right: 20px; }
+        .stat-card .trend { font-size: 12px; color: var(--success); position: absolute; top: 20px; right: 20px; font-weight: bold; }
 
         /* BÜTÇE İLERLEME ÇUBUĞU */
         .budget-progress-container {
@@ -127,12 +128,12 @@
         .budget-progress-bar {
             height: 100%;
             background: var(--warning);
-            width: 27%;
+            width: 0%; /* Harcanan sıfır olduğu için %0 yapıldı */
             border-radius: 10px;
         }
         .budget-text { font-size: 11px; color: var(--text-muted); margin-top: 5px; display: block; }
 
-        /* LİSTELER VE LOGLAR (Grafiksiz Düzen) */
+        /* LİSTELER VE LOGLAR */
         .data-row {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -204,29 +205,29 @@
             </div>
             <div class="stat-card financial">
                 <h3>Harcanan Bütçe</h3>
-                <p>540.50 <span style="font-size: 16px;">USDT</span></p>
+                <p>0.00 <span style="font-size: 16px;">USDT</span></p>
                 <div class="budget-progress-container">
                     <div class="budget-progress-bar"></div>
                 </div>
-                <span class="budget-text">%27.02 Kullanıldı</span>
+                <span class="budget-text">%0 Kullanıldı</span>
             </div>
             <div class="stat-card financial">
                 <h3>Tıklama Başı (CPC)</h3>
-                <p>0.25 <span style="font-size: 16px;">USDT</span></p>
+                <p>0.00 <span style="font-size: 16px;">USDT</span></p>
             </div>
             <div class="stat-card">
                 <h3>Gösterim (7 Gün)</h3>
-                <p>108,000</p>
-                <span class="trend">↑ %14</span>
+                <p>0</p>
+                <span class="trend">↑ %0</span>
             </div>
             <div class="stat-card">
                 <h3>Site Tıklanması</h3>
-                <p>2,160</p>
-                <span class="trend">↑ %9</span>
+                <p>0</p>
+                <span class="trend">↑ %0</span>
             </div>
             <div class="stat-card">
                 <h3>Coin İncelenmesi</h3>
-                <p>850</p>
+                <p>0</p>
             </div>
         </div>
 
@@ -234,13 +235,13 @@
             <div class="data-container">
                 <h3>Ülkelere Göre Tıklanmalar</h3>
                 <ul class="country-list">
-                    <li><span>🇺🇸 Amerika</span> <strong>540</strong></li>
-                    <li><span>🇩🇪 Almanya</span> <strong>380</strong></li>
-                    <li><span>🇹🇷 Türkiye</span> <strong>350</strong></li>
-                    <li><span>🇬🇧 İngiltere</span> <strong>310</strong></li>
-                    <li><span>🇷🇺 Rusya</span> <strong>250</strong></li>
-                    <li><span>🇧🇷 Brezilya</span> <strong>180</strong></li>
-                    <li><span>🇯🇵 Japonya</span> <strong>150</strong></li>
+                    <li><span>🇺🇸 Amerika</span> <strong>0</strong></li>
+                    <li><span>🇩🇪 Almanya</span> <strong>0</strong></li>
+                    <li><span>🇹🇷 Türkiye</span> <strong>0</strong></li>
+                    <li><span>🇬🇧 İngiltere</span> <strong>0</strong></li>
+                    <li><span>🇷🇺 Rusya</span> <strong>0</strong></li>
+                    <li><span>🇧🇷 Brezilya</span> <strong>0</strong></li>
+                    <li><span>🇯🇵 Japonya</span> <strong>0</strong></li>
                 </ul>
             </div>
             
@@ -249,13 +250,7 @@
                 <div class="system-logs">
                     > Sisteme giriş yapıldı. Token yetkilendirmesi başarılı.<br>
                     > Bütçe kontrolü yapılıyor... OK<br>
-                    > [14:02:11] Yeni tıklama (TR) - 0.25 USDT<br>
-                    > [14:02:45] Sayfa yüklendi (Cüzdan bağlanmadı)<br>
-                    > [14:05:12] Yeni tıklama (DE) - 0.24 USDT<br>
-                    > [14:06:01] ICARUS Whitepaper incelendi.<br>
-                    > [14:08:33] X (Twitter) yönlendirmesi tespit edildi.<br>
-                    > [14:10:05] Yeni tıklama (US) - Cihaz: iOS<br>
-                    > [14:12:20] Yeni organik arama girişi (Google)<br>
+                    > Kampanya başlatılması bekleniyor...<br>
                     <span style="color: #94a3b8; animation: blink 1s infinite;">_</span>
                 </div>
             </div>
